@@ -1,0 +1,26 @@
+{
+  "name": "djs-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ppauel/djs-template.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ppauel/djs-template/issues"
+  },
+  "homepage": "https://github.com/ppauel/djs-template#readme",
+  "dependencies": {
+    "@discordjs/builders": "^0.9.0",
+    "@discordjs/rest": "^0.2.0-canary.0",
+    "discord-api-types": "^0.25.2",
+    "discord.js": "^13.3.1",
+    "dotenv": "^10.0.0"
+  }
+}
