@@ -10,3 +10,37 @@ Create a new file called `.env` and insert your bot token as shown in the `.env.
  - Interaction Handler (Buttons, Select Menus, Modals)
  - Event Handler
  - Examples and Templates
+
+
+## Modal Submit Bugfix (discord.js@dev)
+### TypeError: createComponent is not a function
+
+The current version of discord.js@dev throws an error when submitting a modal. The following steps will fix this issue until there is an update:
+
+In
+```bash
+node_modules/discord.js/src/structures/ModalSubmitInteraction.js
+```
+
+change `createComponent(c)` to `Components.createComponent(c)`, which you want to require from `../util/Components`.
+
+In
+
+```bash
+node_modules/discord.js/src/util/Components.js
+```
+
+add this to the bottom of the file
+
+```js
+const TextInputComponent = require('../structures/TextInputComponent');
+```
+
+and add the following case to the switch
+
+```js
+case ComponentType.TextInput:
+  return new TextInputComponent(data);
+```
+
+This issue is mentioned in detail [here](https://github.com/discordjs/discord.js/pull/7649).
