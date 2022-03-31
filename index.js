@@ -1,15 +1,19 @@
-const { Client, Collection } = require('discord.js');
+const { Client, Collection, Partials } = require('discord.js');
 const dotenv = require('dotenv');
 const fs = require('fs');
 
 dotenv.config();
 
 // Initialization
-const client = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'DIRECT_MESSAGES'], partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
+const client = new Client(
+	{
+		intents: ['Guilds', 'GuildMessages', 'GuildMembers', 'DirectMessages'],
+		partials: [Partials.Message, Partials.Channel, Partials.Reaction]
+	});
 
 // Collections
 client.commands = new Collection();
-client.components = new Collection();
+client.interactions = new Collection();
 client.cooldowns = new Collection();
 
 // Command Handler
@@ -18,10 +22,10 @@ for (const file of fs.readdirSync('./commands').filter(file => file.endsWith('.j
 	client.commands.set(command.data.name, command);
 }
 
-// Component Handler
-for (const file of fs.readdirSync('./components').filter(file => file.endsWith('.js'))) {
-	const component = require(`./components/${file}`);
-	client.components.set(component.data.id, component);
+// Interaction Handler
+for (const file of fs.readdirSync('./interactions').filter(file => file.endsWith('.js'))) {
+	const interaction = require(`./interactions/${file}`);
+	client.interactions.set(interaction.data.id, interaction);
 }
 
 // Event Handler

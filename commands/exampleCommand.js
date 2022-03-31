@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageActionRow, MessageButton, MessageSelectMenu, MessageEmbed } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -41,11 +40,22 @@ module.exports = {
         .addStringOption(option => option
             .setName('choice')
             .setDescription('Select a choice')
-            .addChoice('Option A', 'a')
-            .addChoice('Option B', 'b')
-            .addChoice('Option C', 'c')
+            .addChoices(
+                {
+                    name: 'Option A',
+                    value: 'a'
+                },
+                {
+                    name: 'Option B',
+                    value: 'b'
+                },
+                {
+                    name: 'Option C',
+                    value: 'c'
+                }
+            )
         ),
-    global: true,
+    global: false,
     async execute(interaction) {
         const string = interaction.options.getString('input');
         const integer = interaction.options.getInteger('int');
@@ -58,7 +68,7 @@ module.exports = {
         const mentionable = interaction.options.getMentionable('mentionable');
         const choice = interaction.options.getString('choice');
 
-        console.log([string, integer, number, boolean, user, member, channel, role, mentionable, choice]);
+        // console.log([string, integer, number, boolean, user, member, channel, role, mentionable, choice]);
 
         await interaction.reply({ content: 'Pong!', ephemeral: true });
     },

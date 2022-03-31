@@ -1,5 +1,6 @@
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
+const { ActivityType } = require('discord.js');
 const config = require('../config.json');
 
 module.exports = {
@@ -17,7 +18,8 @@ module.exports = {
         await rest.put(Routes.applicationGuildCommands(client.user.id, config.guildId), { body: guildCommands })
             .catch(console.error);
 
-        // await client.user.setActivity("something", { type: 'WATCHING' });
+        // Presence
+        client.user.setPresence({ activities: [{ name: 'music', type: ActivityType.Listening }], status: 'online' });
 
         console.log(`Ready! Logged in as ${client.user.tag} (${client.user.id})`);
     },

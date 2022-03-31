@@ -1,5 +1,9 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageActionRow, MessageButton, MessageSelectMenu, MessageEmbed } = require('discord.js');
+const { ActionRowBuilder } = require('discord.js');
+
+const exampleButton = require('../interactions/exampleButton');
+const exampleSelectMenu = require('../interactions/exampleSelectMenu');
+const exampleModal = require('../interactions/exampleModal');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -14,46 +18,28 @@ module.exports = {
             subcommand
                 .setName('selectmenu')
                 .setDescription('Send a Select Menu')
+        )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName('modal')
+                .setDescription('Open a Modal')
         ),
     global: false,
     async execute(interaction) {
         if (interaction.options.getSubcommand() === 'button') {
-            const row = new MessageActionRow()
-                .addComponents(
-                    new MessageButton()
-                        .setCustomId('myButton')
-                        .setLabel('Button')
-                        .setEmoji('😎')
-                        //.setURL('https://discord.com')
-                        //.setDisabled(true);
-                        .setStyle('PRIMARY'), // SECONDARY, SUCCESS, DANGER, LINK
-    
-                );
+            const row = new ActionRowBuilder()
+                .addComponents(exampleButton.data.builder); // Button in interactions/exampleButton.js
             await interaction.reply({ content: 'Example Button', components: [row], ephemeral: true });
         }
 
         else if (interaction.options.getSubcommand() === 'selectmenu') {
-            const row = new MessageActionRow()
-                .addComponents(
-                    new MessageSelectMenu()
-                        .setCustomId('mySelectMenu')
-                        .setPlaceholder('Nothing selected')
-                        //.setMinValues(1)
-                        //.setMaxValues(2)
-                        .addOptions([
-                            {
-                                label: 'Option A',
-                                description: 'Description',
-                                value: 'a',
-                            },
-                            {
-                                label: 'Option B',
-                                description: 'Description',
-                                value: 'b',
-                            },
-                        ]),
-                );
+            const row = new ActionRowBuilder()
+                .addComponents(exampleSelectMenu.data.builder); // SelectMenu in interactions/exampleSelectMenu.js
             await interaction.reply({ content: 'Example Select Menu', components: [row], ephemeral: true });
+        }
+
+        else if (interaction.options.getSubcommand() === 'modal') {
+            await interaction.showModal(exampleModal.data.builder);
         }
     },
 };
