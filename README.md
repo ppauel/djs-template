@@ -1,4 +1,9 @@
-# Discord.js v14 Bot Template
+<div align="center">
+  <br />
+  <p>
+    <img src="https://i.imgur.com/Xhguvlc.png" width="546" alt="Discord.js Bot Template" />
+  </p>
+</div>
 
 ## Setup
 
@@ -16,6 +21,7 @@ Create a new file called `.env` and insert your bot token as shown in the `.env.
 ### TypeError: createComponent is not a function
 
 The current version of discord.js@dev throws an error when submitting a modal. The following steps will fix this issue until there is an update:
+![image](https://user-images.githubusercontent.com/82803315/162082766-a5301a1e-73fd-4457-865a-3ee2642a58d3.png)
 
 In
 ```bash
