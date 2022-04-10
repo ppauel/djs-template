@@ -16,7 +16,7 @@ Create a new file called `.env` and insert your bot token as shown in the `.env.
  - Event Handler
  - Examples and Templates
 
-
+<!-- 
 ## Modal Submit Bugfix (discord.js@dev)
 ### TypeError: createComponent is not a function
 
@@ -49,3 +49,4 @@ case ComponentType.TextInput:
 ```
 
 This issue is mentioned in detail [here](https://github.com/discordjs/discord.js/pull/7649).
+ -->
