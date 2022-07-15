@@ -1,36 +1,40 @@
-const { Client, Collection, Partials } = require('discord.js');
+const { Client, Collection, GatewayIntentBits, Partials } = require('discord.js');
 const dotenv = require('dotenv');
 const fs = require('fs');
 
 dotenv.config();
 
 // Initialization
-const client = new Client(
-	{
-		intents: ['Guilds', 'GuildMessages', 'GuildMembers', 'DirectMessages'],
-		partials: [Partials.Message, Partials.Channel, Partials.Reaction]
-	});
+const client = new Client({
+	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMembers, GatewayIntentBits.DirectMessages],
+	partials: [Partials.Message, Partials.Channel, Partials.Reaction, Partials.GuildMember]
+});
 
 // Collections
 client.commands = new Collection();
 client.interactions = new Collection();
 client.cooldowns = new Collection();
 
+// Paths
+let commandPath = "./commands",
+	interactionPath = "./interactions",
+	eventPath = "./events";
+
 // Command Handler
-for (const file of fs.readdirSync('./commands').filter(file => file.endsWith('.js'))) {
-	const command = require(`./commands/${file}`);
+for (const file of fs.readdirSync(commandPath).filter(file => file.endsWith('.js'))) {
+	const command = require(`${commandPath}/${file}`);
 	client.commands.set(command.data.name, command);
 }
 
 // Interaction Handler
-for (const file of fs.readdirSync('./interactions').filter(file => file.endsWith('.js'))) {
-	const interaction = require(`./interactions/${file}`);
+for (const file of fs.readdirSync(interactionPath).filter(file => file.endsWith('.js'))) {
+	const interaction = require(`${interactionPath}/${file}`);
 	client.interactions.set(interaction.data.id, interaction);
 }
 
 // Event Handler
-for (const file of fs.readdirSync('./events').filter(file => file.endsWith('.js'))) {
-	const event = require(`./events/${file}`);
+for (const file of fs.readdirSync(eventPath).filter(file => file.endsWith('.js'))) {
+	const event = require(`${eventPath}/${file}`);
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args));
 	} else {

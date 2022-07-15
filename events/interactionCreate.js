@@ -1,10 +1,13 @@
+const { InteractionType } = require("discord.js");
+
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction) {
-        if (interaction.isCommand()) {
+        // Command
+        if (interaction.type === InteractionType.ApplicationCommand) {
             const command = interaction.client.commands.get(interaction.commandName);
             if (!command) return;
-    
+
             try {
                 await command.execute(interaction);
             } catch (error) {
@@ -12,9 +15,11 @@ module.exports = {
                 await interaction.reply({ content: 'There was an error while executing this command.', ephemeral: true });
             }
         }
-        else if (interaction.isMessageComponent()) {
+
+        // Message Component (Button, Select Menu)
+        else if (interaction.type === InteractionType.MessageComponent) {
             const component = interaction.client.interactions.get(interaction.customId);
-            if (!component) return await interaction.deferUpdate();
+            if (!component) return;
 
             try {
                 await component.execute(interaction);
@@ -23,9 +28,11 @@ module.exports = {
                 await interaction.reply({ content: 'There was an error while responding to this interaction.', ephemeral: true });
             }
         }
-        else if (interaction.isModalSubmit()) {
+
+        // Modal
+        else if (interaction.type === InteractionType.ModalSubmit) {
             const modal = interaction.client.interactions.get(interaction.customId);
-            if (!modal) return await interaction.deferUpdate();
+            if (!modal) return;
 
             try {
                 await modal.execute(interaction);

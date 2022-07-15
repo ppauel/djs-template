@@ -3,10 +3,11 @@ const { ApplicationCommandType } = require('discord.js');
 
 module.exports = {
     data: new ContextMenuCommandBuilder()
-        .setName('Pong')
-        .setType(ApplicationCommandType.Message), // User
+        .setName('Get user ID')
+        .setType(ApplicationCommandType.User), // Message
     global: false,
     async execute(interaction) {
-        await interaction.reply({ content: 'Ping!', ephemeral: true });
+        const userID = interaction.member.user.id;
+        await interaction.reply({ content: `${userID}`, ephemeral: true });
     },
 };

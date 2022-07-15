@@ -7,7 +7,7 @@ const exampleModal = require('../interactions/exampleModal');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('send')
+        .setName('example')
         .setDescription('Example Command with Subcommands')
         .addSubcommand(subcommand =>
             subcommand
@@ -22,7 +22,7 @@ module.exports = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName('modal')
-                .setDescription('Open a Modal')
+                .setDescription('Show a Modal')
         ),
     global: false,
     async execute(interaction) {

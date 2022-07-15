@@ -18,7 +18,7 @@ module.exports = {
         await rest.put(Routes.applicationGuildCommands(client.user.id, config.guildId), { body: guildCommands })
             .catch(console.error);
 
-        // Presence
+        // Rich Presence
         client.user.setPresence({ activities: [{ name: 'music', type: ActivityType.Listening }], status: 'online' });
 
         console.log(`Ready! Logged in as ${client.user.tag} (${client.user.id})`);

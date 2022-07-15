@@ -1,11 +1,13 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { EmbedBuilder } = require('discord.js');
+const config = require('../config.json');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('ping')
+        .setName('input')
         .setDescription('Example Command')
         .addStringOption(option => option
-            .setName('input')
+            .setName('string')
             .setDescription('Enter a string')
             .setRequired(true)
         )
@@ -57,19 +59,17 @@ module.exports = {
         ),
     global: false,
     async execute(interaction) {
-        const string = interaction.options.getString('input');
-        const integer = interaction.options.getInteger('int');
-        const number = interaction.options.getNumber('num');
-        const boolean = interaction.options.getBoolean('bool');
-        const user = interaction.options.getUser('user');
-        const member = interaction.options.getMember('user');
-        const channel = interaction.options.getChannel('channel');
-        const role = interaction.options.getRole('role');
-        const mentionable = interaction.options.getMentionable('mentionable');
-        const choice = interaction.options.getString('choice');
+        const string = interaction.options.getString('input'),
+            integer = interaction.options.getInteger('int'),
+            number = interaction.options.getNumber('num'),
+            boolean = interaction.options.getBoolean('bool'),
+            user = interaction.options.getUser('user'),
+            member = interaction.options.getMember('user'),
+            channel = interaction.options.getChannel('channel'),
+            role = interaction.options.getRole('role'),
+            mentionable = interaction.options.getMentionable('mentionable'),
+            choice = interaction.options.getString('choice');
 
-        // console.log([string, integer, number, boolean, user, member, channel, role, mentionable, choice]);
-
-        await interaction.reply({ content: 'Pong!', ephemeral: true });
+        await interaction.reply({ content: `...`, ephemeral: true });
     },
 };
