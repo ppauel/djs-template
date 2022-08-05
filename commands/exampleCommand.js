@@ -6,6 +6,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('input')
         .setDescription('Example Command')
+        //.setDefaultMemberPermissions(0) Set Permission
         .addStringOption(option => option
             .setName('string')
             .setDescription('Enter a string')
