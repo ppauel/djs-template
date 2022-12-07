@@ -5,6 +5,9 @@
   </p>
 </div>
 
+**This repository is deprecated and will not receive any further updates for the time being.**\
+It will be replaced by [ppauel/typescript-discord-bot](**https://github.com/ppauel/typescript-discord-bot**), which is based on TypeScript. Nevertheless I am happy about everyone who used this repository! ❤️
+
 ## Setup
 
 Create a new file called `.env` and insert your bot token as shown in the `.env.example` file. After that you specify the **guild id** of the server you want to use for guild commands in the `config.json` file. To install all required packages, run `npm i` in the bot's root directory. Now you can start the bot by running `node .` or use it with [PM2](https://pm2.keymetrics.io/).
